@@ -1,20 +1,21 @@
 #include <stdio.h>
 #include <winsock2.h>
+#include <afunix.h>
+#include <string.h>
 
 int main()
 {
     WSADATA wsa;
     SOCKET s;
-    struct sockaddr_in server;
+    struct sockaddr_un server;
     char msg[100];
 
     WSAStartup(MAKEWORD(2,2), &wsa);
 
-    s = socket(AF_INET, SOCK_STREAM, 0);
+    s = socket(AF_UNIX, SOCK_STREAM, 0);
 
-    server.sin_family=AF_INET;
-    server.sin_addr.s_addr=inet_addr("127.0.0.1");
-    server.sin_port=htons(8888);
+    server.sun_family = AF_UNIX;
+    strcpy(server.sun_path, "mysocket");
 
     connect(s, (struct sockaddr*)&server, sizeof(server));
 
