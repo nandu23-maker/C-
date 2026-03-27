@@ -10,7 +10,7 @@ int main()
   hMapFile = OpenFileMapping(
         FILE_MAP_ALL_ACCESS,
         FALSE,                //no inheritance
-        "my shared memory"
+        "mysharedmemory"
   );
   
   //Map memory

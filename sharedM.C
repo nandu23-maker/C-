@@ -16,7 +16,7 @@ int main()
         PAGE_READWRITE,
         0,
         1024,
-        "my shared memory"
+        "mysharedmemory"
    );
 
    //Map memory
@@ -29,7 +29,7 @@ int main()
  
    //write data
    strcpy(pBuf,"Hello from process 1!");
-   printf("Data written\n");
+   printf("Data written");
    
    getchar();
   

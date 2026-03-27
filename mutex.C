@@ -1,23 +1,23 @@
-#include<windows.h>
+#include <windows.h>
 #include <stdio.h>
 
-int main()
-{
+int main() {
     HANDLE hMutex;
 
-    //create mutex
-    hMutex = CreateMutex(NULL,FALSE,"MyMutex");
+    hMutex = CreateMutex(NULL, FALSE, "MyMutex");
 
-    //lock
-    WaitForSingleObject(hMutex,INFINITE);
+    printf("Trying to enter....\n");
 
-    printf("enterr\n");
+    WaitForSingleObject(hMutex, INFINITE);
 
-    //unlock
+    printf("wait\n");
+
+    Sleep(5000);
+
+    printf("leaving\n");
+
     ReleaseMutex(hMutex);
-    printf("PID: %lu Trying...\n", GetCurrentProcessId());
- 
+
     CloseHandle(hMutex);
-    
     return 0;
 }
