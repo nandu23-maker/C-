@@ -2,14 +2,23 @@
 #include <stdio.h>
 
 int main() {
-    char buffer[100];
-    DWORD readBytes;
-    HANDLE hStdIn = GetStdHandle(STD_INPUT_HANDLE);
+         HANDLE hmap;
+         char *ptr;
 
-    if (ReadFile(hStdIn, buffer, sizeof(buffer) - 1, &readBytes, NULL)) {
-        buffer[readBytes] = '\0';
-        printf("Child received: %s\n", buffer);
-    }
+         hmap=OpenFileMapping(
+                     FILE_MAP_ALL_ACCESS,
+                     FALSE,
+                     "mysharedmemory"
+                    );
 
+         ptr=(char*)MapViewOfFile(
+                             hmap,
+                             FILE_MAP_ALL_ACCESS,
+                             0,0,100
+                            );
+         
+         printf("child read: %s\n",ptr);
+
+    
     return 0;
 }
